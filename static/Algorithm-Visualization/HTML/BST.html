@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Binary Search Tree</title>
+    <script src="../jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="../JavaScript/AnimationLibrary.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Rectangle.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Circle.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Line.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Text.js"></script>
+    <script type="text/javascript" src="../JavaScript/BST.js"></script>
+    <script type="text/javascript" src="../layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/BST.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+</head>
+<body onload="initCanvas();">
+<div id = "container">
+    <div id="title">Binary Search Tree</div>
+    <div id="head">
+        <p>
+            <input id="preorder" type="button" value="Preorder Traversal" onclick="Preorder();">
+            <input id="inorder" type="button" value="Inorder Traversal" onclick="Inorder();">
+            <input id="postorder" type="button" value="Postorder Traversal" onclick="Postorder();">
+            <input id="levelorder" type="button" value="Levelorder Traversal" onclick="Levelorder();">
+        </p>
+    </div>
+    <div id="mid">
+        <canvas id="myCanvas" width="850" height="550">Do not support canvas !</canvas>
+    </div>
+    <div id="foot">
+        <input id="insertbox" type="text">
+        <input id="insert" type="button" value="Insert" onclick="Insert();">
+        <input id="deletebox" type="text">
+        <input id="delete" type="button" value="Delete" onclick="Delete();">
+        <input id="findbox" type="text">
+        <input id="find" type="button" value="Find" onclick="Find();">
+        <input id="clear" type="button" value="Clear" onclick="Clear();">
+        <input id="fill" type="button" value="Fill" onclick="Fill();">
+        &nbsp;&nbsp;&nbsp;<b> [ Speed ] </b> &nbsp; MIN
+        <input id="range_speed" type="range" name="range_speed" value="50" oninput="changeSpeed()">MAX
+    </div>
+</div>
+</body>
+</html>

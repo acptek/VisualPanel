@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Content</title>
+{% end %}
+
+{% block body %}
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+                    <span class="sr-only">Exchange</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a class="icon-bar" href="/index?user={{username}}">Home</a>
+                    </li>
+                    <li><a href="/log_creator">Create New Log</a>
+                    </li>
+                    <li><a href="/log_manager">Manage Logs</a>
+                    </li>
+                    <li><a href="#">Manager account</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <div class="btn-group">
+                            <button style="margin: 10px; min-width: 80px;" type="button" class="btn btn-primary dropdown-toggle btn-sm"
+                                    data-toggle="dropdown">
+                                {{username}} <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Personal Center</a></li>
+                                <li><a href="#">Change Password</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/login"><b>Log out</b></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="text-center" style="margin-top: 30px"><h3>Content</h3></div>
+    <div style="width: 100%">
+        <div style="width: 80%; border: 1px solid gray; margin: auto">
+            <p>
+                <div class="text-center">
+                     [TITLE]
+                </div>
+                <div class="text-center">
+                    <b>{{loginfo['title']}}</b>
+                </div>
+                <hr/>
+            </p>
+            <p>
+
+                <div class="text-center">
+                    [Related Algorithm] : <b>{{alg_list[int(loginfo['algid'])]}}</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    [Create Time] : <b>{{loginfo['time']}}</b>
+                </div>
+            </p>
+            <p>
+                <div class="text-center">
+                    <textarea id="content" rows="15" cols="100">
+                        {{loginfo['content']}}
+                    </textarea>
+                </div>
+            </p>
+            <p>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary btn-lg" id="update">Update</button>
+                </div>
+            </p>
+        </div>
+    </div>
+{% end %}
+
+{% block script %}
+    <script>
+        var str = window.location.search;
+        var pos;
+        for(var i = 0; i < str.length; i++){
+            if(str[i] == '='){
+                pos = i;
+                break;
+            }
+        }
+
+        $(document).ready(function () {
+            $('#update').click(function () {
+                var cont = $('#content').val();
+                var logid = str.slice(pos+1);
+                var pd = {'content':cont, 'logid':logid};
+                console.log(pd);
+                $.ajax({
+                    type:'post',
+                    url:'/log_content',
+                    data:pd,
+                    cache:false,
+                    success:function () {
+                        window.location.href = '/log_manager';
+                    },
+                    error:function (backdate) {
+                        alert(backdate);
+                    }
+                })
+            });
+        });
+    </script>
+{% end %}

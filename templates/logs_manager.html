@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>DManager</title>
+{% end %}
+
+{% block body %}
+ <body>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+                    <span class="sr-only">Exchange</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a class="icon-bar" href="/index?user={{username}}">Home</a>
+                    </li>
+                    <li><a href="/log_creator">Create New Log</a>
+                    </li>
+                    <li class="active"><a href="#">Manage Logs</a>
+                    </li>
+                    <li><a href="#">Manager account</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <div class="btn-group">
+                            <button style="margin: 10px; min-width: 80px;" type="button" class="btn btn-primary dropdown-toggle btn-sm"
+                                    data-toggle="dropdown">
+                                {{username}} <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Personal Center</a></li>
+                                <li><a href="#">Change Password</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/login"><b>Log out</b></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-striped ">
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Title</th>
+                                <th>Tag</th>
+                                <th>Content</th>
+                                <th>Time</th>
+                                <th>Operations</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in range(0, len(userloginfo)) %}
+                                <tr>
+                                    <td>{{i}}</td>
+                                    <td><a id="tit{{userloginfo[i]['id']}}" href="/log_content?logid={{userloginfo[i]['id']}}">{{userloginfo[i]['title']}}</a></td>
+                                    <td>{{alg_list[int(userloginfo[i]['algid'])]}}</td>
+                                    <td>
+                                        {{userloginfo[i]['content'][0:min(20, len(userloginfo[i]['content']))]}}
+                                        {% if len(userloginfo[i]['content']) > 20 %}
+                                        <b> ...</b>
+                                        {% end %}
+                                    </td>
+                                    <td>{{userloginfo[i]['time']}}</td>
+                                    <td>
+                                    <div class="btn-group">
+                                        <a id="upd{{userloginfo[i]['id']}}" href="/log_content?logid={{userloginfo[i]['id']}}" class="btn btn-primary">Update</a>
+                                        <a id="del{{userloginfo[i]['id']}}" class="btn btn-danger">Delete</a>
+                                    </div>
+                                </td>
+                                </tr>
+
+                            {% end %}
+
+                        </tbody>
+                    </table>
+                </div>
+                <ul class="pagination" style="float: right;">
+                    <li><a href="#">&laquo;</a>
+                    </li>
+                    <li class="active"><a href="#">1</a>
+                    <!--</li>-->
+                    <!--<li class="disabled"><a href="#">2</a>-->
+                    <!--</li>-->
+                    <!--<li><a href="#">3</a>-->
+                    <!--</li>-->
+                    <!--<li><a href="#">4</a>-->
+                    <!--</li>-->
+                    <!--<li><a href="#">5</a>-->
+                    <!--</li>-->
+                    <li><a href="#">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+ </body>
+{% end %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $('a[id^="del"]').click(function () {
+                var delid = $(this).attr("id");
+                var pd = {'delid':delid};
+                $.ajax({
+                    type:'post',
+                    url:'/log_manager',
+                    data:pd,
+                    cache:false,
+                    success:function () {
+                        window.location.href = '/log_manager';
+                    },
+                    error:function (backdata) {
+                        alert('Delete Failed !'+ backdata);
+                    }
+                });
+            });
+        });
+    </script>
+{% end %}

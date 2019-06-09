@@ -1,0 +1,13 @@
+1 : Stack
+2 : Queue
+3 : List            [wait]
+4 : Sort            [change]
+5 : Sort_quick
+6 : Sort_shell      [wait]
+7 : Sort_Merge      [wait]
+8 : BST
+9 : Prim
+10: Dijkstra
+11: Topology        [wait]
+12: Com_geom        [wait]
+13: Com_rotate      [wait]

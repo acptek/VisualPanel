@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Text</title>
+    <script type="text/javascript" src="../JavaScript/AnimationLibrary.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Rectangle.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Circle.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Line.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Text.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style type="text/css">
+        canvas{border:#ccc solid 1px;}
+    </style>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<canvas id="myCanvas" width="850" height="500"></canvas>
+<h1>Hello, world!</h1>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+
+    // function Node() {
+    //     this.Val = null;
+    //     this.Ide = null;
+    //     this.NextEdges = new Array();
+    //     this.EdgesNum = 0;
+    //     Circle.call(this);
+    // }
+    // Node.prototype = new Circle();
+    // Node.prototype.constructor = Node;
+
+    //生成图的n个顶点坐标
+    // function polygon(n,x,y,r,angle,counterclockwise){
+    //     var angle = angle || 0;
+    //     var counterclockwise = counterclockwise || false;
+    //     let arr = new Array();
+    //     let posx = x + r*Math.sin(angle), posy = y - r*Math.cos(angle);
+    //     let delta = 2*Math.PI/n;
+    //     for(let i=0;i<n;i++){
+    //         angle += counterclockwise ? -delta : delta;
+    //         posx = x + r*Math.sin(angle), posy = y - r*Math.cos(angle);
+    //         arr[i]= new Circle();
+    //         arr[i].Inite(posx, posy, 20);
+    //     }
+    //     return arr;
+    // }
+    //
+    //
+    // var canvas = document.getElementById('myCanvas');
+    // var c = canvas.getContext("2d");
+    // c.beginPath();
+    // let xx = polygon(5,600,250,200);
+    // console.log(xx);
+    //c.fillStyle = '#f00';
+    //c.fill();
+
+    // let a = [3, 7, 8, 2, 9, 6, 4, 10, 8, 7];
+    // let i, j;
+    // movei = ()=>{
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(()=>{
+    //             i++;
+    //             resolve("i++");
+    //         }, 100);
+    //     })
+    // };
+    //
+    // movej = ()=>{
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(()=>{
+    //             j--;
+    //             resolve("j--");
+    //         }, 100);
+    //     })
+    // };
+    //
+    // swap = ()=>{
+    //     return new Promise((resolve, reject) => {
+    //         let xx = 0;
+    //         let mm = setInterval(()=>{
+    //             if(xx < 5) {
+    //                 let tmp = a[i];
+    //                 a[i] = a[j];
+    //                 a[j] = tmp;
+    //                 xx++;
+    //             }else {
+    //                 clearTimeout(mm);
+    //                 resolve("swap");
+    //             }
+    //         }, 50);
+    //     })
+    // };
+    //
+    // quick_sort = async (left, right)=> {
+    //     return new Promise(async (resolve, reject) => {
+    //         i = left;
+    //         j = right;
+    //         let midIndex = parseInt((i + j) >> 1);
+    //         let mid = a[midIndex];
+    //         console.log(left, right, midIndex);
+    //         while (i < j)
+    //         {
+    //             while (a[i] < mid)	await movei();
+    //             while (a[j] > mid)	await movej();
+    //             if (i <= j)
+    //             {
+    //                 await swap();
+    //                 await movei();
+    //                 await movej();
+    //             }
+    //         }
+    //         if (left < j)	await quick_sort(left, j);
+    //         if (right > i)	await quick_sort(i, right);
+    //         resolve("sdd");
+    //     });
+    // };
+    // console.log(a);
+    // quick_sort(0, 9);
+    // setTimeout(()=>{
+    //     console.log(a);
+    // }, 10000);
+    // // Arr[i].PosX < Arr[j].PosX
+    // const swap = (ctx, i, j)=> {
+    //     return new Promise((resolve, reject) => {
+    //         var iendX = Arr[j].PosX, iendY = Arr[i].PosY - 3 * BASEWIDTH - 20;
+    //         var jendX = Arr[i].PosX, jendY = Arr[j].PosY + 3 * BASEWIDTH + 20;
+    //         var ifinalY = Arr[j].PosY, jfinalY = Arr[i].PosY;
+    //         var moveArr = setInterval(function () {
+    //             if (Arr[i].PosY > iendY) {
+    //                 Arr[i].PosY -= 5;
+    //                 Arr[j].PosY += 5;
+    //                 if (Arr[i].PosY < iendY) {
+    //                     Arr[i].PosY += iendY - Arr[i].PosY;
+    //                 }
+    //                 if (Arr[j].PosY > jendY) {
+    //                     Arr[j].PosY -= Arr[j].PosY - jendY;
+    //                 }
+    //             } else if (Arr[i].PosX < iendX) {
+    //                 Arr[i].PosX += 5;
+    //                 Arr[j].PosX -= 5;
+    //                 if (Arr[i].PosX > iendX) {
+    //                     Arr[i].PosX -= Arr[i].PosX - iendX;
+    //                 }
+    //                 if (Arr[j].PosX < jendX) {
+    //                     Arr[j].PosX += jendX - Arr[i].PosX;
+    //                 }
+    //             } else {
+    //                 clearTimeout(moveArr);
+    //                 var moveArrNext = setInterval(function () {
+    //                     if (Arr[i].PosY < ifinalY) {
+    //                         Arr[i].PosY += 5;
+    //                         Arr[j].PosY -= 5;
+    //                         if (Arr[i].PosY > ifinalY) {
+    //                             Arr[i].PosY -= ifinalY - Arr[i].PosY;
+    //                         }
+    //                         if (Arr[j].PosY < jfinalY) {
+    //                             Arr[j].PosY += jfinalY - Arr[j].PosY;
+    //                         }
+    //                     } else {
+    //                         clearTimeout(moveArrNext);
+    //                         var tmp = Arr[i];
+    //                         Arr[i] = Arr[j];
+    //                         Arr[j] = tmp;
+    //                         console.log(i, Arr);
+    //                         drawAll(ctx);
+    //                         resolve("Move Finish !");
+    //                     }
+    //                     drawAll(ctx);
+    //                 }, TIMEINTERVAL);
+    //             }
+    //             drawAll(ctx);
+    //         }, TIMEINTERVAL);
+    //     })
+    // };
+    //
+    // const f1 = (value) =>{
+    //     return new Promise((resolve, reject) =>{
+    //         setTimeout(()=>{
+    //             console.log(value);
+    //             resolve('hello' + value.toString());
+    //         }, 1000)
+    //     })
+    // };
+    //
+    // const ff = async ()=>{
+    //     for(let i = 0; i < 10; i++){
+    //         let res = await f1(i);
+    //         console.log(res);
+    //     }
+    // };
+    //
+    // ff();
+
+    // const f1 = function() {
+    //     return new Promise((resolve, reject)=>{
+    //         function ff(){
+    //             setTimeout(()=>{
+    //                 console.log("wertyuioppghjk - 1");
+    //                 resolve("1-Success");
+    //             }, 2000);
+    //         }
+    //         ff();
+    //     })
+    // };
+    //
+    // const f2 = function() {
+    //     return new Promise((resolve, reject)=>{
+    //         function ff(){
+    //             setTimeout(()=>{
+    //                 console.log("wertyuioppghjk - 2");
+    //                 resolve("2-Success");
+    //             }, 1500);
+    //         }
+    //         ff();
+    //     })
+    // };
+    //
+    // const f3 = function() {
+    //     return new Promise((resolve, reject)=>{
+    //         function ff(){
+    //             setTimeout(()=>{
+    //                 console.log("wertyuioppghjk - 3");
+    //                 resolve("3-Success");
+    //             }, 1000);
+    //         }
+    //         ff();
+    //     })
+    // };
+    //
+    // const f = async function () {
+    //     let t1 = await f1();
+    //     console.log(t1);
+    //     let t2 = await f2();
+    //     console.log(t2);
+    //     let t3 = await f3();
+    //     console.log(t3);
+    // };
+    //
+    // f();
+
+    // let a = 0;
+    //
+    // let promise = new Promise(function (resolve, reject) {
+    //     //resolve : when success
+    //     //reject : when fail
+    //
+    //     if(a == 10){
+    //         resolve("Success !");
+    //     } else {
+    //         reject("Fail !");
+    //     }
+    // });
+    //
+    // //promise.then(success, fail)
+    //
+    // promise.then(res => {
+    //     console.log(res);
+    // }, err =>{
+    //     console.log(err);
+    // });
+    //
+    // promise.catch(err=>{
+    //     console.log(err);
+    // });
+    // ////////////////////////////////
+    // let p1 = Promise.reject("adsd");
+    //
+    // p1.then().catch(res=>{
+    //     console.log("1  " + res);
+    // });
+    // ////////////////////////////////////
+    // let all = Promise.race([promise, p1]).then(res=>{
+    //     console.log(res);
+    // }, faa =>{
+    //     console.log("2  " + faa);
+    // });
+    // /////////////////////////////////
+    // let status = 1;
+    // let userLogin = (resolve, reject) => {
+    //     setTimeout(()=>{
+    //         if (status == 1){
+    //             resolve({data:"登录成功", msg:"xxx"});
+    //         } else {
+    //             reject("登录失败");
+    //         }
+    //     }, 2000);
+    // };
+    //
+    // let getUserInfo = (resolve, reject) =>{
+    //     setTimeout(()=>{
+    //        if(status == 1){
+    //            resolve("用户信息......");
+    //        } else{
+    //            reject("获取失败");
+    //        }
+    //     }, 1000);
+    // }
+    //
+    // new Promise(userLogin).then(res=>{
+    //     console.log("用户登录成功");
+    //     return new Promise(getUserInfo);
+    // }).then(res => {
+    //     console.log("获取信息成功");
+    //     console.log(res);
+    // });
+    //
+    // let sym = Symbol('aaa');
+
+    //generator
+    // function  * gen() {
+    //     yield "welcome";
+    //     yield "to";
+    //     yield "Here";
+    // }
+    // let g = gen();
+    // console.log(g.next());
+    // console.log(g.next());
+    // console.log(g.next());next
+
+    // let [a, b, c] = gen();
+    // console.log(a, b, c);
+    // console.log(...gen());
+    //
+    // for(let val of g){
+    //     console.log(val);
+    //     SleepTime(2000);
+    // }
+
+    // function * gen(){
+    //     let val = yield 'hee';
+    //     yield axios.get('https://api.github.com/${val}');
+    // }
+    //
+    // let g1 = gen();
+    //
+    // let username = g1.next().value;
+    //
+    // g1.next(username).value.then(res=>{
+    //     console.log(res.data);
+    // });
+
+    // 1. Promise
+
+    // let ss = 1;
+    // const get = function(name){
+    //   return new Promise((resolve, reject) =>{
+    //       if(ss == 1) resolve("SS = 1");
+    //       else reject("SS != 1");
+    //   });
+    // };
+    //
+    // async function fn() {
+    //     let f1 = await Fun();
+    //
+    // }
+
+    // function f1() {
+    //     setTimeout(() => {
+    //         console.log(1);
+    //     }, 2000);
+    // }
+    //
+    // function f2() {
+    //     setTimeout(() => {
+    //         console.log(2);
+    //     }, 1500);
+    // }
+    //
+    // function f3() {
+    //     setTimeout(() => {
+    //         console.log(3);
+    //     }, 1000);
+    // }
+    //
+    // let fun1 = f1();
+    // let fun2 = f2();
+    // let fun3 = f3();
+    // new Promise(fun1).then(() => {
+    //     console.log("f1");
+    //     return new Promise(fun2);
+    // }).then(() =>{
+    //     console.log("f2");
+    //     return new Promise(fun3);
+    // }).then(()=>{
+    //     console.log("f3");
+    //     return new Promise(fun3);
+    // })
+
+
+    // async function fun() {
+    //     let x1 = await f1;
+    //     let x2 = await f2;
+    //     //console.log(x2);
+    //     let x3 = await f3;
+    //     //console.log(x3);
+    // }
+    //
+    // fun();
+    //
+    // let g = gen();
+    // g.next().value.then(res=>{
+    //     console.log(res.toString());
+    // })
+
+    //疑问
+    // function send(val){
+    //     setTimeout(()=>{
+    //         console.log(val);
+    //     }, 1000);
+    // }
+    //
+    // let arr = [1, 2, 3, 4];
+    // async function task() {
+    //     for(let val of arr){
+    //         let result = await send(val);
+    //         if(!result) break;
+    //     }
+    // }
+    // task();
+
+    // //1 promise 里面写 函数执行的方法
+    // //2 if 异步成功 （成功方法+resolve） 否则 reject
+    // //3 调用时用async和await同步
+    // const longTimeTask = function (time) {
+    //     return new Promise((resolve, reject)=>{
+    //         setTimeout(()=>{
+    //             console.log(`等了 ${time||'xx'} 年，终于回信了`);
+    //             resolve({'msg': 'task done'});
+    //         }, time||1000)
+    //     })
+    // }
+    //
+    // const exec1 = async function () {
+    //     let res = await longTimeTask(3000);
+    //     console.log('rww ==> ', res);
+    // }
+    // exec1();
+
+
+</script>
+</body>
+</html>
+
+

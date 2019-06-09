@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap.css">
+	<script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+	<script src="/static/lib/bootstrap/js/bootstrap.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a class="icon-bar" href="/index?user={{username}}">Home</a>
+                    </li>
+                    <li><a href="/log_creator">Create New Log</a>
+                    </li>
+                    <li><a href="/log_manager">Manage Logs</a>
+                    </li>
+                    <li><a href="#">Manager account</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle btn-sm"
+                                    data-toggle="dropdown">
+                                原始 <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">功能</a></li>
+                                <li><a href="#">另一个功能</a></li>
+                                <li><a href="#">其他</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">分离的链接</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a>Welcome ,{{userinfo['name']}}</a></li>
+                    <li><a href="#">Log out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        <div style="width: 20%; height: 600px; border: 1px solid black; float: left;">
+            <h3><b>Algorithm List</b></h3>
+            <ul>
+                {% for alg in alglist %}
+                    <br/>
+                    <li><a id='alg{{alg}}'>{{alg}} : {{alglist[alg]}}</a></li>
+                {% end %}
+            </ul>
+        </div>
+        <div style="width: 80%; height: 600px; border: 1px solid black; float: left;" id="display"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+             $("#display").load("../lib/Algorithm-Visualization/HTML/BST.html");
+        });
+    </script>
+ </body>
+
+</html>

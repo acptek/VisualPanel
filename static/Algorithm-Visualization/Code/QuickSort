@@ -1,0 +1,17 @@
+void quick_sort(int left, int right)
+{
+	int i = left, j = right;
+	int mid = a[(i + j) >> 1];
+	while (i < j)
+	{
+		while (a[i] < mid)	i++;
+		while (a[j] > mid)	j--;
+		if (i <= j)
+		{
+			swap(a[i], a[j]);
+			i++; j--;
+		}
+	}
+	if (left < j)	quick_sort(left, j);
+	if (right > i)	quick_sort(i, right);
+}

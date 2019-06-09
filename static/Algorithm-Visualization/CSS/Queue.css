@@ -1,0 +1,62 @@
+canvas{
+    border: 1px solid #000;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+table tr {
+    height: 40px;
+    text-align: center;
+}
+
+table tr td {
+    width: 50px;
+    overflow: hidden;
+    border:1px solid black;
+}
+
+#container{
+    display: block;
+}
+
+#title{
+    width: 830px;
+    font: bold 30px arial,sans-serif;;
+    text-align: center;
+    border: 1px solid;
+    padding: 10px;
+    background: #cccccc;
+}
+
+#head{
+    width: 850px;
+    border: 1px solid;
+}
+
+#head input{
+    width: 100px;
+    height: 30px;
+    margin: 10px;
+}
+
+#foot{
+    margin: 0px;
+    width: 850px;
+    border: 1px solid;
+}
+
+#foot input{
+    width: 100px;
+    height: 30px;
+    margin: 10px;
+    align: center;
+}
+
+#enque{
+    width: 80px;
+    height: 20px;
+    font-size: 16px;
+    text-align: center;
+}

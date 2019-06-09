@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Sort</title>
+    <script src="../jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="../JavaScript/AnimationLibrary.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Rectangle.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Circle.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Line.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Code.js"></script>
+    <script type="text/javascript" src="../JavaScript/Sort_quick.js"></script>
+    <script type="text/javascript" src="../layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/Sort.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+</head>
+<body onload="initCanvas();">
+<div id = "container">
+    <div id="title">Quick Sort</div>
+    <div id="mid">
+        <canvas id="myCanvas" width="850" height="550">Do not support canvas !</canvas>
+    </div>
+    <div id="foot">
+        <input id="random" type="button" value="Randomize Array" onclick="Randomize()">
+        <input id="start_pause" type="button" value="Start" onclick="Start_Pause();">
+        <input id="display" type="button" value="Display Range" onclick="Display();">
+        &nbsp;&nbsp;&nbsp;<b> [ Speed ] </b> &nbsp; MIN
+        <input id="range_speed" type="range" name="range_speed" value="50" oninput="changeSpeed()">MAX
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stack</title>
+    <script src="../jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="../JavaScript/AnimationLibrary.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Rectangle.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Circle.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Line.js"></script>
+    <script type="text/javascript" src="../JavaScript/Stack.js"></script>
+    <script type="text/javascript" src="../layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/Stack.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+</head>
+<body onload="initCanvas();">
+<div id = "container">
+    <div id="title">Stack</div>
+    <div id="head">
+        <p>
+            <input id="enstack" type="text">
+            <input id="push" type="button" value="Enstack" onclick="Push();">
+            <input id="pop" type="button" value="Destack" onclick="Pop();">
+        </p>
+    </div>
+    <div id="mid">
+        <canvas id="myCanvas" width="850" height="450">Do not support canvas !</canvas>
+    </div>
+    <div id="foot">
+        <input id="clear" type="button" value="Clear Stack" onclick="Clear();">
+        <input id="fill" type="button" value="Fill Stack" onclick="Fill();">
+        <input id="speed" type="button" value="Control Speed" onclick="Speed();">
+    </div>
+</div>
+</body>
+</html>

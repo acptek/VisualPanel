@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>index</title>
+    <style>
+        #left{
+            width: 20%;
+            height: 600px;
+            border-right: 2px solid lightgray;
+            float: left;
+        }
+
+        #right{
+            width: 80%;
+            position: relative;
+            float: left;
+        }
+
+        #header{
+            height: 100px;
+            /*border: 2px solid lightgray;*/
+        }
+
+        #body{
+            height: 400px;
+        }
+        
+        #bodyleft{
+            /*border: 2px solid lightgray;*/
+            height: 100%;
+            width: 50%;
+            float: left;
+            position: relative;
+        }
+
+        #bodyleftup{
+            border: 2px solid lightgray;
+            height: 20%;
+            width: 100%;
+        }
+
+        #bodyleftmid{
+            border: 2px solid lightgray;
+            height: 40%;
+            width: 100%;
+        }
+
+        #bodyleftdown{
+            border: 2px solid lightgray;
+            height: 40%;
+            width: 100%;
+        }
+
+        #bodyright{
+            border: 2px solid lightgray;
+            height: 100%;
+            width: 50%;
+            float: left;
+            position: relative;
+        }
+
+        #footer{
+            height: 100px;
+            border: 2px solid lightgray;
+        }
+
+        .algseen{
+            margin-left:20%;
+            width: 80%;
+        }
+
+        .algseen td{
+            width: 40%;
+        }
+
+        .logtable{
+            margin-left: 10px;
+            width: 90%;
+        }
+
+        .logtable th{
+            color: #2aabd2;
+        }
+
+        #footer div{
+            width: 25%;
+            float: left;
+            margin-top: 40px;
+        }
+
+        #footer div input{
+            width: 150px;
+            border-radius:5px;
+        }
+        #logout{
+
+        }
+
+    </style>
+{% end %}
+
+{% block body %}
+
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a class="icon-bar" href="#">Home</a>
+                    </li>
+                    <li><a href="/log_creator">Create New Log</a>
+                    </li>
+                    <li><a href="/log_manager">Manage Logs</a>
+                    </li>
+                    <li><a href="#">Manager account</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <div class="btn-group">
+                                <button style="margin: 10px; min-width: 80px;" type="button" class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown">
+                                    {{userinfo['name']}} <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Personal Center</a></li>
+                                    <li><a href="#">Change Password</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/login"><b>Log out</b></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="left">
+        <h3><b>Algorithm List</b></h3>
+        <ul>
+            {% for alg in alglist %}
+                <br/>
+                <li><a id='alg{{alg}}' href="/alg_show?algid={{alg}}">{{alg}} : {{alglist[alg]}}</a></li>
+            {% end %}
+        </ul>
+    </div>
+    <div id="right">
+        <div id="header" class="text-center">
+            <div id="header_text">
+                <h2>Welcome to Algorithm Visualization Platform , {{userinfo['name']}}</h2>
+            </div>
+        </div>
+        <div id="body">
+            <div id="bodyleft">
+                <div id="bodyleftup">
+                    {% if userinfo['lastseen'] == None %}
+                        <div class="text-center" style="margin-top: 20px"><b>You have not seen any animation !</b></div>
+                    {% else %}
+                        <div class="text-center">
+                            <p>Last time, you visited : <b>{{alglist[int(userinfo['lastseen'])]}}</b></p>
+                            <p><a href="/alg_show?algid={{userinfo['lastseen']}}"><u><b>Click here to Visit it !</b></u></a></p>
+                        </div>
+                    {% end %}
+                </div>
+                <div id="bodyleftmid">
+                    {% if len(haveseen) == 0 %}
+                        <div class="text-center" style="margin-top: 20px;"><b>You haven't visited any algorithm !</b></div>
+                    {% else %}
+                        <div class="text-center"><b>Have Visited</b></div>
+                        <table class="algseen">
+                            {% for one in range(0, int(len(haveseen)/2+0.5)) %}
+                                <tr>
+                                    {% if one*2 < len(haveseen) %}
+                                        <td>
+                                            <a href="/alg_show?algid={{haveseen[one*2]}}">{{int(haveseen[one*2])}}. {{alglist[int(haveseen[one*2])]}}</a>
+                                        </td>
+                                    {% end %}
+                                    {% if one*2+1 < len(haveseen) %}
+                                        <td>
+                                            <a href="/alg_show?algid={{haveseen[one*2+1]}}">{{int(haveseen[one*2+1])}}. {{alglist[int(haveseen[one*2+1])]}}</a>
+                                        </td>
+                                    {% end %}
+                                </tr>
+                            {% end %}
+                        </table>
+                    {% end %}
+                </div>
+                <div id="bodyleftdown">
+                    {% if len(haventseen) == 0 %}
+                        <div class="text-center" style="margin-top: 20px">You have visited all algorithm here !</div>
+                    {% else %}
+                        <div class="text-center"><b>Haven't Visited</b></div>
+                        <table class="algseen">
+                            {% for one in range(0, int(len(haventseen)/2+0.5)) %}
+                                <tr>
+                                    {% if one*2 < len(haventseen) %}
+                                        <td>
+                                            <a href="/alg_show?algid={{haventseen[one*2]}}">{{int(haventseen[one*2])}}. {{alglist[int(haventseen[one*2])]}}</a>
+                                        </td>
+                                    {% end %}
+                                    {% if one*2+1 < len(haventseen) %}
+                                        <td>
+                                            <a href="/alg_show?algid={{haventseen[one*2+1]}}">{{int(haventseen[one*2+1])}}. {{alglist[int(haventseen[one*2+1])]}}</a>
+                                        </td>
+                                    {% end %}
+                                </tr>
+                            {% end %}
+                        </table>
+                    {% end %}
+                </div>
+            </div>
+            <div id="bodyright">
+                <div class="text-center" style="margin-top: 20px"><b>Log List</b></div>
+                <br/>
+                <div id="loglist">
+                    {% if userloginfo == None %}
+                        <div class="text-center" style="margin-top: 50px">
+                            <b>You have not make any log yet !</b>
+                        </div>
+                    {% else %}
+                        <table class="logtable">
+                            <tr>
+                                <th style="width: 10%">Id</th>
+                                <th style="width: 30%">Log Title</th>
+                                <th style="width: 30%">Algorithm Tag</th>
+                                <th style="width: 30%">Create Time</th>
+                            </tr>
+                            {% for index in range(0, min(len(userloginfo), 10)) %}
+                            <tr>
+                                <td>{{index}}</td>
+                                <td><a href="/log_content?logid={{userloginfo[index]['id']}}">{{userloginfo[index]['title']}}</a></td>
+                                <td>{{alglist[int(userloginfo[index]['algid'])]}}</td>
+                                <td>{{userloginfo[index]['time']}}</td>
+                            </tr>
+                            {% end %}
+                        </table>
+                        {% if len(userloginfo) > 10 %}
+                            <div class="text-right" style="margin-right: 20px"><a><u>The More</u></a></div>
+                        {% end %}
+                    {% end %}
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="text-center"><input id="create" class="btn-primary" type="button" value="Create New Log"></div>
+            <div class="text-center"><input id="manage" class="btn-primary" type="button" value="Manage Logs"></div>
+            <div class="text-center"><input class="btn-primary" type="button" value="Manage Account"></div>
+            <div class="text-center"><input id="outbtn" class="btn-default" type="button" value="Login Out"></div>
+        </div>
+    </div>
+
+    <!--<h1>hello</h1>-->
+    <!--<h2>Your informations are:</h2>-->
+    <!--<ul>-->
+        <!--{% for one in userinfo %}-->
+            <!--<li>{{one}}:{{userinfo[one]}}</li>-->
+        <!--{% end %}-->
+    <!--</ul>-->
+{% end %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $('#create').click(function () {
+                console.log('tiaozhuan');
+                window.location.href = '/log_creator';
+            });
+
+            $('#manage').click(function () {
+                console.log('tiaozhuan');
+                window.location.href = '/log_manager';
+            });
+
+            $('#outbtn').click(function () {
+                console.log('tiaozhuan');
+                window.location.href = '/login';
+            });
+        });
+    </script>
+{% end %}

@@ -1,0 +1,71 @@
+const swap = async (ctx, i, j) => {
+    return new Promise((resolve, reject) => {
+        let iendx = Arr[j].PosX, jendx = Arr[i].PosX;
+        let iendy1 = Arr[i].PosY + 3*BASEWIDTH + 20, jendy1 = Arr[i].PosY - 3*BASEWIDTH - 20;
+        let iendy = Arr[0].PosY, jendy = Arr[0].PosY;
+        let state = 0;
+        let move = setInterval(()=>{
+            if(state == 0){
+                if(Arr[i].PosY < iendy1){
+                    Arr[i].PosY += 5;
+                    Arr[j].PosY -= 5;
+                    drawAll(ctx);
+                }else{
+                    Arr[i].PosY -= Arr[i].PosY - iendy1;
+                    Arr[j].PosY += jendy1 - Arr[j].PosY;
+                    state = 1;
+                    drawAll(ctx);
+                }
+            }else{
+                if(state == 1){
+                    if(Arr[i].PosX < iendx){
+                        Arr[i].PosX += 5;
+                        Arr[j].PosX -= 5;
+                        drawAll(ctx);
+                    }else{
+                        Arr[i].PosX -= Arr[i].PosX - iendx;
+                        Arr[j].PosX += jendx - Arr[j].PosX;
+                        state = 2;
+                    }
+                }else{
+                    if(Arr[i].PosY > iendy){
+                        Arr[i].PosY -= 5;
+                        Arr[j].PosY += 5;
+                        drawAll(ctx);
+                    }else{
+                        clearTimeout(move);
+                        Arr[i].PosY += iendy - Arr[i].PosY;
+                        Arr[j].PosY -= Arr[j].PosY - jendy;
+
+                        let tmp = Arr[i];
+                        Arr[i] = Arr[j];
+                        Arr[j] = tmp;
+
+                        drawAll(ctx);
+
+                        resolve("swap");
+                    }
+                }
+            }
+        }, TIMEINTERVAL);
+    })
+};
+
+
+swap1 = (ctx, i, j)=>{
+    iIndex  = i;
+    jIndex = j;
+    return new Promise((resolve, reject) => {
+        setTimeout(()=>{
+            //console.log(Arr[iIndex], Arr[jIndex]);
+            let tmp = Arr[iIndex].Value;
+            Arr[iIndex].Value = Arr[jIndex].Value;
+            Arr[jIndex].Value = tmp;
+            Arr[iIndex].Height = Arr[iIndex].Value*(3*BASEWIDTH/MAXN);
+            Arr[jIndex].Height = Arr[jIndex].Value*(3*BASEWIDTH/MAXN);
+            //console.log(Arr[iIndex], Arr[jIndex]);
+            drawAll(ctx);
+            resolve("swap");
+        }, 10*TIMEINTERVAL);
+    })
+};

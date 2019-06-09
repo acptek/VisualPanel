@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Queue</title>
+    <script src="../jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="../JavaScript/AnimationLibrary.js"></script>
+    <script type="text/javascript" src="../JavaScript/Queue.js"></script>
+    <script type="text/javascript" src="../layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/Queue.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+</head>
+<body onload="initCanvas();">
+<div id = "container">
+    <div id="title">Queue</div>
+    <div id="head">
+        <p>
+            <input id="enque" type="text">
+            <input id="push" type="button" value="Enqueue" onclick="Push();">
+            <input id="pop" type="button" value="Dequeue" onclick="Pop();">
+            <input id="clear" type="button" value="Clear Queue" onclick="Clear();">
+        </p>
+    </div>
+    <div id="mid">
+        <canvas id="myCanvas" width="850" height="450">Do not support canvas !</canvas>
+    </div>
+    <div id="foot">
+        <input id="fill" type="button" value="Fill Queue" onclick="Fill();">
+    </div>
+</div>
+</body>
+</html>

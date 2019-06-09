@@ -1,0 +1,12 @@
+.layui-layer layui-layer-dialog layui-layer-border layui-layer-msg {
+    background: red;
+    border: none;
+}
+
+.layui-layer layui-layer-dialog layui-layer-border layui-layer-msg .layui-layer-content {
+    padding: 5rem 3rem 2rem 3rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    height: 1px;
+}

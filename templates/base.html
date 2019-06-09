@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}{% end %}
+    <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap.css">
+	<script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+	<script src="/static/lib/bootstrap/js/bootstrap.js"></script>
+</head>
+<body>
+    <header>
+        {% block header %}{% end %}
+    </header>
+    <content>
+        {% block body %}{% end %}
+    </content>
+    <footer>
+        <!--{% set website = "<a>welcome to my website</a>" %}-->
+        <!--{% raw website %}-->
+    </footer>
+    {% block script %}{% end %}
+</body>
+</html>

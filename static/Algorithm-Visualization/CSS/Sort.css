@@ -1,0 +1,64 @@
+canvas{
+    border: 1px solid #000;
+}
+
+#container{
+    display: block;
+}
+
+#title{
+    width: 830px;
+    font: bold 30px arial,sans-serif;;
+    text-align: center;
+    border: 1px solid;
+    padding: 10px;
+    background: #cccccc;
+}
+
+#head{
+    width: 850px;
+    border: 1px solid;
+}
+
+#head input{
+    width: 118px;
+    height: 30px;
+    margin: 10px;
+    font-size: 16px;
+    text-align: center;
+}
+
+#foot{
+    margin: 0px;
+    width: 850px;
+    border: 1px solid;
+}
+
+#foot input{
+    width: 130px;
+    height: 30px;
+    margin: 10px;
+    font-size: 16px;
+    text-align: center;
+}
+
+input[type=range]{
+    margin-top: 8px;
+    outline: none;
+    -webkit-appearance: none;/*清除系统默认样式*/
+    /*width:25% !important;*/
+    width: 150px;
+    height: 10px !important;
+    background: -webkit-linear-gradient(#61bd12, #61bd12) no-repeat, #baddd9;
+    background-size: 50% 100%;/*设置左右宽度比例*/
+    height: 3px;/*横条的高度*/
+}
+/*拖动块的样式*/
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;/*清除系统默认样式*/
+    height:10px;/*拖动块高度*/
+    width: 10px;/*拖动块宽度*/
+    background: #fff;/*拖动块背景*/
+    border-radius: 0%; /*外观设置为圆形*/
+    border: solid 1px #ddd; /*设置边框*/
+}

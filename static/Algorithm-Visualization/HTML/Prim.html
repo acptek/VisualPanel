@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prim</title>
+    <script src="../jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="../JavaScript/AnimationLibrary.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Rectangle.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Circle.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Line.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Text.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Graph.js"></script>
+    <script type="text/javascript" src="../JavaScript/Element/Table.js"></script>
+    <script type="text/javascript" src="../JavaScript/Prim.js"></script>
+    <script type="text/javascript" src="../layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/Sort.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+</head>
+<body onload="initCanvas();">
+<div id = "container">
+    <div id="title">Prim</div>
+    <div id="mid">
+        <canvas id="myCanvas" width="850" height="500">Do not support canvas !</canvas>
+    </div>
+    <div id="foot">
+        <b>Start Point</b>
+        <input id="startbox" type="text">
+        <input id="start_pause" type="button" value="Start" onclick="Start_Pause();">
+        <input id="random" type="button" value="New Graph" onclick="Randomize()">
+        &nbsp;&nbsp;&nbsp;<b> [ Speed ] </b> &nbsp; MIN
+        <input id="range_speed" type="range" name="range_speed" value="50" oninput="changeSpeed()">MAX
+
+    </div>
+</div>
+</body>
+</html>
